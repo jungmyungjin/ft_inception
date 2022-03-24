@@ -1,0 +1,17 @@
+-- CREATE root@localhost IDENTIFIED BY '123456';
+-- SET PASSWORD FOR root@localhost = PASSWORD('123456');
+-- GRANT ALL ON *.* TO root@localhost WITH GRANT OPTION;
+-- CREATE root@'%' IDENTIFIED BY '123456';
+-- SET PASSWORD FOR root@'%' = PASSWORD('123456');
+-- GRANT ALL ON *.* TO root@'%' WITH GRANT OPTION;
+-- CREATE 'mjung'@'%' IDENTIFIED BY '123456';
+-- SET PASSWORD FOR 'mjung'@'%' = PASSWORD('123456');
+-- CREATE DATABASE IF NOT EXISTS wordpress;
+-- GRANT ALL ON wordpress.* TO 'mjung'@'%';
+-- FLUSH PRIVILEGES;
+CREATE DATABASE wordpress;
+CREATE USER 'mjung'@'%';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'mjung'@'%' IDENTIFIED BY '123456';
+CREATE USER 'user1'@'%';
+FLUSH PRIVILEGES;
+exit
