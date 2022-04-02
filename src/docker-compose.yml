@@ -1,15 +1,20 @@
 version: "3.7"
 
+volumes:
+  share_wordpress:
+
 services:
   mariadb:
     platform: linux/amd64
     env_file: ./.env
     build:
       context: ./requirements/mariadb
-      dockerfile: Dockerfile
-      # volumes:
-      #   - dbdata:/var/lib/mysql
+      dockerfile:
+        Dockerfile
+        #volumes:
+        #- ~/mjung/data/dbdata:/var/lib/mysql
     restart: always
+    tty: true
     expose:
       - "3306"
     environment:
@@ -30,10 +35,11 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      - ~/mjung/data:/myPhp/data
+      - share_wordpress:/share_wordpress
     expose:
       - "9000"
       - "3306"
+    tty: true
     restart: always
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
@@ -54,17 +60,20 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      - ~/mjung/data:/myPhp/data
+      - share_wordpress:/share_wordpress
     expose:
       - "9000"
-      - "3306"
     restart: always
     ports:
       - 443:443
+    tty: true
     networks:
       intra:
         aliases:
           - mynginx
+    environment:
+      - VIRTUAL_HOST=www.mjung.42.fr
+      - VIRTUAL_PORT=3000
 
 networks:
   intra:

@@ -1,4 +1,4 @@
-YML_FILE = /Users/jungmyungjin/Workspace/docker/ft_inception/src/docker-compose.yml
+YML_FILE = ./src/docker-compose.yml
 
 OPT = -f $(YML_FILE)
 
@@ -10,10 +10,14 @@ up:
 down:
 	docker compose $(OPT) down
 
+clean:
+	echo 1 || ./clean.sh
+	docker compose $(OPT) rm -f
+
 ps:
 	docker compose $(OPT) ps
 
-re: down up
+re: down clean up
 
 .PHONY: up down ps
 
