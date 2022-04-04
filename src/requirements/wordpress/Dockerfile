@@ -19,14 +19,12 @@ COPY conf/wp-config.php /share_wordpress/wordpress/wp-config.php
 
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-
 # wordpress 자동설치
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN chmod +x wp-cli.phar
-# RUN mv wp-cli.phar /usr/local/bin/wp
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+# RUN cd /share_wordpress
 # RUN wp core download --allow-root
-# RUN wp config create --allow-root --dbname="wordpress" --dbuser="mjung" --dbpass="123456" --dbhost="mydb"
-# RUN wp core install --allow-root --url="localhost" --title="Blog Title" --admin_user="mjung" --admin_password="123456" --admin_email="mjung@student.42seoul.kr"
 
 # service start
 COPY ./conf/entrypoint.sh /wordpress_workdir/.
