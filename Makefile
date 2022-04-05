@@ -5,17 +5,17 @@ OPT = -f $(YML_FILE)
 all: up
 
 up: 
-	docker compose $(OPT) up --build
+	docker-compose $(OPT) up --build
 
 down:
-	docker compose $(OPT) down
+	docker-compose $(OPT) down
 
 clean:
 	echo 1 || ./clean.sh
-	docker compose $(OPT) rm -f
+	docker-compose $(OPT) rm -f
 
 ps:
-	docker compose $(OPT) ps
+	docker-compose $(OPT) ps
 
 re: down clean up
 
