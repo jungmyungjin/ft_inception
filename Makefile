@@ -25,7 +25,7 @@ clean:
 ps:
 	docker-compose $(OPT) ps
 
-re: down clean up
+re: down clean build_up
 
 .PHONY: up down ps
 
