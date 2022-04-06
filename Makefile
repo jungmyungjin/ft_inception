@@ -2,7 +2,10 @@ YML_FILE = ./src/docker-compose.yml
 
 OPT = -f $(YML_FILE)
 
-all: up
+all: build_up
+
+init:
+	./tools/init.sh
 
 build_up: 
 	docker-compose $(OPT) up --build
@@ -17,7 +20,7 @@ build:
 	docker-compose $(OPT) build --no-cache
 
 clean:
-	./clean.sh
+	./tools/clean.sh
 
 ps:
 	docker-compose $(OPT) ps
