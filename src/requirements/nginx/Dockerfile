@@ -26,5 +26,5 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 # service start
 COPY --chmod=0755 tools/entrypoint.sh /nginx_workdir/entrypoint.sh
-ENTRYPOINT /nginx_workdir/entrypoint.sh
-
+ENTRYPOINT ["/nginx_workdir/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

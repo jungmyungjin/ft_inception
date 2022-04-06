@@ -31,4 +31,5 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 # service start
 COPY --chmod=0755 ./tools/entrypoint.sh /wordpress_workdir/entrypoint.sh
-ENTRYPOINT /wordpress_workdir/entrypoint.sh
+ENTRYPOINT ["/wordpress_workdir/entrypoint.sh"]
+CMD ["/usr/sbin/php-fpm7.3", "-F", "-R"]

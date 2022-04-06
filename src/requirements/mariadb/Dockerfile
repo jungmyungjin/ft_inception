@@ -16,3 +16,4 @@ COPY --chmod=0755 tools/entrypoint.sh .
 
 # RUN mysql_install_db
 ENTRYPOINT [ "/mariaDB/entrypoint.sh" ] 
+CMD ["mysqld_safe"]
