@@ -4,15 +4,20 @@ OPT = -f $(YML_FILE)
 
 all: up
 
-up: 
+build_up: 
 	docker-compose $(OPT) up --build
+
+up :
+	docker-compose $(OPT) up
 
 down:
 	docker-compose $(OPT) down
 
+build:
+	docker-compose $(OPT) build --no-cache
+
 clean:
-	echo 1 || ./clean.sh
-	docker-compose $(OPT) rm -f
+	./clean.sh
 
 ps:
 	docker-compose $(OPT) ps
