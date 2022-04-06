@@ -17,7 +17,6 @@ services:
       intra:
         aliases:
           - mydb
-
   wordpress:
     depends_on:
       - mariadb
@@ -39,7 +38,6 @@ services:
       intra:
         aliases:
           - mywordpress
-
   nginx:
     depends_on:
       - mariadb
@@ -63,21 +61,19 @@ services:
       intra:
         aliases:
           - mynginx
-
 volumes:
   share_wordpress:
-    driver: local
+    driver: local # docker
     driver_opts:
-      type: "none"
-      o: "bind"
-      device: "~/data/web"
+      type: "none" # 마운트 명령을 실행할 때 표시되는 마운트 지점에 연결된 물리적 디스크 파티션이 없음
+      o: "bind" # -o : 드라이버별 옵션 설정, "bind" : 특정 디렉토리를 다른 디렉토리에 붙힐 수 있음
+      device: "~/data/web" # 실제 host의 경로로 마운팅
   share_mysql:
     driver: local
     driver_opts:
       type: "none"
       o: "bind"
       device: "~/data/db"
-
 networks:
   intra:
     driver: bridge
