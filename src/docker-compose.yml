@@ -7,8 +7,8 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    # volumes:
-    #   - share_mysql:/share_mysql
+    volumes:
+      - share_mysql:/var/lib/mysql
     restart: always
     tty: true
     expose:
@@ -27,8 +27,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      # - share_wordpress
-      - ~/mjung/data/web/wordpress:/share_wordpress
+      - share_wordpress:/share_wordpress
     expose:
       - "9000"
       - "3306"
@@ -53,8 +52,7 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      # - share_wordpress
-      - ~/mjung/data/web/wordpress:/share_wordpress
+      - share_wordpress:/share_wordpress
     expose:
       - "9000"
     restart: always
@@ -65,12 +63,20 @@ services:
       intra:
         aliases:
           - mynginx
-    # dns_search:
-    #   - dc1.example.com
-    #   - dc2.example.com
+
 volumes:
   share_wordpress:
-  # share_wordpress: ~/mjung/data/wordpress
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "~/data/web"
+  share_mysql:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "~/data/db"
 
 networks:
   intra:
