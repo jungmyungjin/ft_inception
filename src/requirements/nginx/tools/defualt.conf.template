@@ -37,6 +37,7 @@ server {
 
 	location / {
 		default_type text/plain;
-  		return 200 "go away";
+			return 404;
+  	#	return 200 "go away";
 	}
 }
