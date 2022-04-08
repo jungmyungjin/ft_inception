@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USER_NAME="mjung"
-    mkdir -p ~/data/web
-    mkdir -p ~/data/db
+    mkdir -p /home/mjung/data/web
+    mkdir -p /home/mjung/data/db
 
 
