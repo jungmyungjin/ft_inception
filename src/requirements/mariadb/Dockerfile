@@ -12,8 +12,8 @@ vim mariadb-server procps gettext-base
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY tools/script.sql.template /mariaDB/script.sql.template  
-COPY tools/entrypoint.sh . 
-RUN chmod 755 tools/entrypoint.sh .
+COPY tools/entrypoint.sh .	 
+RUN chmod 755 tools/entrypoint.sh
 
 # RUN mysql_install_db
 ENTRYPOINT [ "/mariaDB/entrypoint.sh" ] 
